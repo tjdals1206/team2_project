@@ -4,11 +4,11 @@
  - 문성민
  - 조민식
 ## project object
-
+ -  board game Monopoly
 ## Specification
- - item
- - feature2
- - feature3
+ - 
+ - 
+ - 
  -
  -
  -
