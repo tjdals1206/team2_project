@@ -11,7 +11,7 @@
 ## Programming language
  - python
 
-##Use integration-manager
+## Use integration-manager
  
 ## Specification
  - player
