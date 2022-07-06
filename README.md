@@ -1,9 +1,9 @@
 # Team2_project
 
 ## Team2 members
- - 김동한 
- - 문성민
- - 조민식
+ - 김동한 (presentation)
+ - 문성민 (maintainer)
+ - 조민식 (make presentation slides)
 
 ## Project object
  -   Monopoly(board game)
