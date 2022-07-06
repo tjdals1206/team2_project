@@ -11,6 +11,8 @@
 ## Programming language
  - python
 
+##Use integration-manager
+ 
 ## Specification
  - player
  - board
