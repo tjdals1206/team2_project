@@ -1,11 +1,11 @@
-# team2_project
+# Team2_project
 
-## team2 members
+## Team2 members
  - 김동한 
  - 문성민
  - 조민식
 
-## project object
+## Project object
  -   Monopoly(board game)
 
 ## Specification
