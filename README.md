@@ -6,7 +6,10 @@
  - 조민식 (make presentation slides)
 
 ## Project object
- -   Monopoly(board game)
+ - Monopoly(board game)
+
+## Programming language
+ - python
 
 ## Specification
  - player
