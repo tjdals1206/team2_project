@@ -11,7 +11,7 @@
 ## Specification
  - player
  - board
- - computer
- -
- -
- -
+ - computer player
+ - move player
+ - city(name, price, owner, empty or not)
+
