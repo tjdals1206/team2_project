@@ -68,7 +68,6 @@ class Player: #real player
     def getBalance(self):
         return self.balance
 
-    
     def move(self): #랜덤한 주사위의 값만큼 이동
         dice = random.randint(1,6)
         print(self.name + " 가 주사위를 굴렸습니다. "+ dice + "만큼 이동합니다.")
