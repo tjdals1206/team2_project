@@ -38,6 +38,125 @@ class City:
         self.owner = "empty"
         self.price = 300
         self.place = ""
+        
+    #Board는 아래와 같이 출력됩니다.
+    #| 도시이름 |
+    #| 도시주인 |
+    #| 도시가격 |
+    #| 플레이어 유무 |
+        def print_board(self):
+        for i in city_name[10:17]:
+            print(" ------------- ".center(13), end='\t')
+        print()
+        for i in city_name[10:17]:
+            print("|" + globals()[i].name.center(13) + "|", end='\t')
+        print()
+        for i in city_name[10:17]:
+            print("|" + globals()[i].owner.center(13)+ "|", end='\t')
+        print()
+        for i in city_name[10:17]:
+            print("|" + str(globals()[i].price).center(13)+ "|", end='\t')
+        print()
+        for i in city_name[10:17]:
+            print("|" + globals()[i].place.center(13)+ "|", end='\t')
+        print()
+        for i in city_name[10:17]:
+            print(" ------------- ".center(13), end='\t')
+        print()
+
+        print(" ------------- ".center(13), end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print(" ------------- ".center(13))
+        print("|" + Sydney.name.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + Paris.name.center(13) + "|")
+        print("|" + Sydney.owner.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + Paris.owner.center(13) + "|")
+        print("|" + str(Sydney.price).center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + str(Paris.price).center(13) + "|")
+        print("|" + Sydney.place.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + Paris.place.center(13) + "|")
+        print(" ------------- ".center(13), end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print(" ------------- ".center(13))
+
+        print(" ------------- .center(13), end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print(" ------------- ".center(13))
+        print("|" + Tokyo.name.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + New_York.name.center(13) + "|")
+        print("|" + Tokyo.owner.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + New_York.owner.center(13) + "|")
+        print("|" + str(Tokyo.price).center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + str(New_York.price).center(13) + "|")
+        print("|" + Tokyo.place.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + New_York.place.center(13) + "|")
+        print(" ------------- ".center(13), end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print(" ------------- ".center(13))
+
+        print(" ------------- ".center(13), end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print(" ------------- ".center(13))
+        print("|" + Bali.name.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + Seoul.name.center(13) + "|")
+        print("|" + Bali.owner.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + Seoul.owner.center(13) + "|")
+        print("|" + str(Bali.price).center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + str(Seoul.price).center(13) + "|")
+        print("|" + Bali.place.center(13) + "|", end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print("|" + Seoul.place.center(13) + "|")
+        print(" ------------- ".center(13), end='\t')
+        for i in range(5):
+            print("".center(13), end='\t')
+        print(" ------------- ".center(13))
+
+        for i in city_name[0:7]:
+            print(" ------------- ".center(13), end='\t')
+        print()
+        for i in reversed(city_name[0:7]):
+            print("|" + globals()[i].name.center(13) + "|", end='\t')
+        print()
+        for i in reversed(city_name[0:7]):
+            print("|" + globals()[i].owner.center(13)+ "|", end='\t')
+        print()
+        for i in reversed(city_name[0:7]):
+            print("|" + str(globals()[i].price).center(13)+ "|", end='\t')
+        print()
+        for i in reversed(city_name[0:7]):
+            print("|" + globals()[i].place.center(13)+ "|", end='\t')
+        print()
+        for i in reversed(city_name[0:7]):
+            print(" ------------- ".center(13), end='\t')
+        print()
 
 Start = City("Start")
 
@@ -77,3 +196,25 @@ class Player: #real player
     def receive(self):
 
     def is_bankrupt(self):
+    
+    
+    
+while True:
+    board = Board()
+    player = Player()
+    computer = ComputerPlayer()
+    board.print_board()
+    player.move()
+    if city_name[player.place] == "empty":
+        player.buy()
+    else:
+        player.pay()
+        computer.receive()
+    player.is_bankrupt()
+    computer.move()
+    if city_name[computer.place] == "empty":
+        computer.buy()
+    else:
+        computer.pay()
+        player.receive()
+    computer.is_bankrupt()
