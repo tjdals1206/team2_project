@@ -89,7 +89,7 @@ class City:
             print("".center(13), end='\t')
         print(" ------------- ".center(13))
 
-        print(" ------------- .center(13), end='\t')
+        print(" ------------- ".center(13), end='\t')
         for i in range(5):
             print("".center(13), end='\t')
         print(" ------------- ".center(13))
