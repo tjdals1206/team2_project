@@ -1,3 +1,5 @@
+import random
+
 class ComputerPlayer:
 
     def __init__(self):
@@ -18,9 +20,22 @@ class ComputerPlayer:
         self.place += dice  # 위치 인덱스에 결과값을 더함
         return self.place
 
-    def buy(self):
+    def buy(self, price):  # 도시가 비어 있고, 잔고가 도시 가격 이상이면 도시를 구매
+        if self.balance >= price:
+            print("컴퓨터가 " + city_name[self.place] + "을(를) 구매했습니다.")
+            self.balance -= price
+            print("컴퓨터의 잔고가 " + self.balance + "만큼 남았습니다.")
+        else:
+            print("잔고가 부족합니다. 도시를 구매하지 못했습니다.")
 
-    def pay(self):
+    def pay(self, price):  # 도시의 소유주가 있을 경우 도시 가격만큼 통행료를 지불
+        if self.owner == "player":
+            if self.balance >= price:
+                print("컴퓨터가 " + self.city_name + "을(를) 구매했습니다.")
+                self.balance -= price
+                print("컴퓨터의 잔고가 " + self.balance + "만큼 남았습니다.")
+            else:
+                print("잔고가 부족합니다. 컴퓨터가 대금을 지불하지 못했습니다.")
 
     def receive(self):
 
