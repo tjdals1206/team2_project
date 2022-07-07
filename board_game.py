@@ -238,17 +238,4 @@ while True:
     player = Player()
     computer = ComputerPlayer()
     board.print_board()
-    player.move()
-    if city_name[player.place] == "empty":
-        player.buy()
-    else:
-        player.pay()
-        computer.receive()
-    player.is_bankrupt()
-    computer.move()
-    if city_name[computer.place] == "empty":
-        computer.buy()
-    else:
-        computer.pay()
-        player.receive()
-    computer.is_bankrupt()
+    break;
