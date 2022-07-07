@@ -28,16 +28,21 @@ class Board:
 
 
 class Player: #real player
-
-    name = ""
-    balance = 5000
-    place = ""
-
+    def __init__(self):
+        self.name = ""
+        self.place = 0
+        self.balance = 5000
+        self.owner = ""
+        self.city_name = ""
+    
     def getName(self):
-
+        return self.name
+    
     def getPlace(self):
-
+        return self.place
+    
     def getBalance(self):
+        return self.balance
 
     def move(self):
 
