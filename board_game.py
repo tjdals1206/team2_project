@@ -67,13 +67,14 @@ class Player: #real player
     
     def getBalance(self):
         return self.balance
+
     
     def move(self): #랜덤한 주사위의 값만큼 이동
         dice = random.randint(1,6)
         print(self.name + " 가 주사위를 굴렸습니다. "+ dice + "만큼 이동합니다.")
         self.place += dice 
         return self.place
-        
+    
     def buy(self,price,city_name): #이동한 도시가 비어있고, 잔고 충분하다면 도시를 구매
         if self.balance >= price:
             print(self.name + " 이(가) " + self.city_name + "을(를) 구매했습니다.")
