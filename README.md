@@ -12,7 +12,12 @@
  - python
 
 ## Use integration-manager
- 
+
+## Part distribution
+ - 김동한 Computer Player
+ - 문성민 Player
+ - 조민식 Board and City
+
 ## Specification
  - player
  - board
