@@ -70,7 +70,7 @@ class Player: #real player
     
     def move(self): # 1~6까지의랜덤한 주사위의 값만큼 이동
         dice = random.randint(1,6)
-        print(self.name + " 가 주사위를 굴렸습니다. "+ dice + "만큼 이동합니다.")
+        print(self.name + " 가 주사위를 굴렸습니다. "+ str(dice) + "만큼 이동합니다.")
         self.place += dice 
         return self.place
 
@@ -78,7 +78,7 @@ class Player: #real player
         if self.balance >= price:
             print(self.name + " 이(가) " + self.city_name + "을(를) 구매했습니다.")
             self.balance -= price
-            print(self.name + "의 잔고가 " + self.balance + "만큼 남았습니다.")
+            print(self.name + "의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
         else:
             print("잔고가 부족합니다. 도시를 구매하지 못했습니다.")
     
@@ -87,7 +87,7 @@ class Player: #real player
             if self.balance >= price:
                 print(self.name + "이(가)" + self.city_name + "을(를) 구매했습니다.")
                 self.balance -= price
-                print(self.name + " 의 잔고가 " + self.balance + "만큼 남았습니다.")
+                print(self.name + " 의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
             else:
                 print("잔고가 부족합니다."+ self.name + "이(가) 대금을 지불하지 못했습니다.")
 
