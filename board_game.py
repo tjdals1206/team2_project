@@ -17,15 +17,15 @@ class ComputerPlayer:
 
     def move(self):  # 주사위를 굴려서 이동해야 하는 인덱스를 반환함
         dice = random.randint(1, 6)  # 랜덤 함수를 이용해서 1, 6사이의 랜덤한 숫자를 반환함
-        print("컴퓨터가 주사위를 굴렸습니다. " + dice + "만큼 이동합니다.")
+        print("컴퓨터가 주사위를 굴렸습니다. " + str(dice) + "만큼 이동합니다.")
         self.place += dice  # 위치 인덱스에 결과값을 더함
         return self.place
 
     def buy(self, price):  # 도시가 비어 있고, 잔고가 도시 가격 이상이면 도시를 구매
         if self.balance >= price:
-            print("컴퓨터가 " + city_name[self.place] + "을(를) 구매했습니다.")
+            print("컴퓨터가 " + self.city_name + "을(를) 구매했습니다.")
             self.balance -= price
-            print("컴퓨터의 잔고가 " + self.balance + "만큼 남았습니다.")
+            print("컴퓨터의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
         else:
             print("잔고가 부족합니다. 도시를 구매하지 못했습니다.")
 
@@ -34,7 +34,7 @@ class ComputerPlayer:
             if self.balance >= price:
                 print("컴퓨터가 " + self.city_name + "을(를) 구매했습니다.")
                 self.balance -= price
-                print("컴퓨터의 잔고가 " + self.balance + "만큼 남았습니다.")
+                print("컴퓨터의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
             else:
                 print("잔고가 부족합니다. 컴퓨터가 대금을 지불하지 못했습니다.")
 
