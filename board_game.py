@@ -311,7 +311,7 @@ class Player:  # real player
         self.balance += price
         print(self.name +"이(가)" + str(price) + "를 받았습니다." )
     
-    def is_bankrupt(self): # player의 잔고로 대금을 지불하지 못해 파산
+    def is_bankrupt(self): # player의 잔고로 대금을 지불하지 못해 파산 잔고가 0보다 적으면 False를 리턴
         if self.balance < 0:
             print(self.name + "이 패배했습니다")
             return False
