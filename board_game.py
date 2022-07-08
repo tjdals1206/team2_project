@@ -268,7 +268,7 @@ for i in city_name:
 
 class Player:  # real player
     def __init__(self):
-        self.name = ""
+        self.name = "player"
         self.place = 0
         self.balance = 5000
         self.owner = ""
