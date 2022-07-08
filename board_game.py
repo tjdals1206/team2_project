@@ -306,13 +306,20 @@ class Player:  # real player
                 print(self.name + " 의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
             else:
                 print("잔고가 부족합니다." + self.name + "이(가) 대금을 지불하지 못했습니다.")
-
-    def pay(self):
-        return self
-    def receive(self):
-        return self
+    
+    def receive(self, price):
+        self.balance += price
+        print(self.name +"이(가)" + str(price) + "를 받았습니다." )
+    
     def is_bankrupt(self):
-        return self
+        if self.balance < 0:
+            print(self.name + "이 패배했습니다")
+            return False
+        else:
+            return True
+    
+
+
 
 while True:
     player = Player()                #player 생성
