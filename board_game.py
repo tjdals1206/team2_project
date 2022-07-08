@@ -268,11 +268,11 @@ for i in city_name:
 
 class Player:  # real player
     def __init__(self):
-        self.name = "player"
-        self.place = 0
-        self.balance = 5000
-        self.owner = ""
-        self.city_name = ""
+        self.name = "player"  # player name
+        self.place = 0  # player의 현재 위치
+        self.balance = 5000  # player의 현재 잔고
+        self.owner = ""  # 위치한 도시의 소유주
+        self.city_name = ""  #도시의 이름 
 
     def getName(self):
         return self.name
@@ -307,11 +307,11 @@ class Player:  # real player
             else:
                 print("잔고가 부족합니다." + self.name + "이(가) 대금을 지불하지 못했습니다.")
     
-    def receive(self, price):
+    def receive(self, price): # 컴퓨터가 내가 소유한 도시에 도착해서 대금을 지불했다면 받음
         self.balance += price
         print(self.name +"이(가)" + str(price) + "를 받았습니다." )
     
-    def is_bankrupt(self):
+    def is_bankrupt(self): # player의 잔고로 대금을 지불하지 못해 파산
         if self.balance < 0:
             print(self.name + "이 패배했습니다")
             return False
