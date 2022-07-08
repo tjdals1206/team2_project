@@ -36,12 +36,19 @@ class ComputerPlayer:
                 self.balance -= price
                 print("컴퓨터의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
             else:
+                self.balance -= price
                 print("잔고가 부족합니다. 컴퓨터가 대금을 지불하지 못했습니다.")
 
-    def receive(self):
-        return self
-    def is_bankrupt(self):
-        return self
+    def receive(self, price):  # 플레이어가 컴퓨터의 도시를 방문했을 때 통행료를 받음
+        self.balance += price
+        print("컴퓨터가 " + str(price) + "를 받았습니다.")
+
+    def is_bankrupt(self):  # 잔고가 0보다 작으면 파산함, 파산할 경우 false를 리턴
+        if self.balance < 0:
+            return False
+        else:
+            return True
+
 
 city_name = ["Start", "Bangkok", "Beijing", "Taipei", "Dubai", "Cairo", "Madrid", "Bali", "Tokyo", "Sydney",
              "Sao_Paulo", "Prague", "Berlin", "Moscow", "Geneva", "Rome", "London", "Paris", "New_York", "Seoul"]
