@@ -307,7 +307,7 @@ class Player:  # real player
             else:
                 print("잔고가 부족합니다." + self.name + "이(가) 대금을 지불하지 못했습니다.")
     
-    def receive(self, price): # 컴퓨터가 내가 소유한 도시에 도착해서 대금을 지불했다면 받음
+    def receive(self, price): # 컴퓨터가 내가 소유한 도시에 도착해서 대금을 지불했다면 대금을 받음
         self.balance += price
         print(self.name +"이(가)" + str(price) + "를 받았습니다." )
     
