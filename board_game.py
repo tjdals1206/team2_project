@@ -48,8 +48,9 @@ city_name = ["Start", "Bangkok", "Beijing", "Taipei", "Dubai", "Cairo", "Madrid"
 
 
 class Board:
-    def __init__(self):
-        self.player = []
+    def __init__(self, player, computer):
+        self.player = player
+        self.computer = computer
 
     # Board는 아래와 같이 출력됩니다.
     # | 도시이름 |
@@ -71,7 +72,13 @@ class Board:
             print("|" + str(globals()[i].price).center(13) + "|", end='\t')
         print()
         for i in city_name[10:17]:
-            print("|" + globals()[i].place.center(13) + "|", end='\t')
+            if len(globals()[i].place) != 0:
+                x = ""
+                for j in globals()[i].place:
+                    x += j
+                print("|" + x.center(13) + "|", end='\t')
+            else:
+                print("|" + "".center(13) + "|", end='\t')
         print()
         for i in city_name[10:17]:
             print(" ------------- ".center(13), end='\t')
@@ -93,10 +100,23 @@ class Board:
         for i in range(5):
             print("".center(13), end='\t')
         print("|" + str(Paris.price).center(13) + "|")
-        print("|" + Sydney.place.center(13) + "|", end='\t')
+        if len(Sydney.place) != 0:
+            x = ""
+            for j in Sydney.place:
+               x += j
+            print("|" + x.center(13) + "|", end='\t')
+        else:
+            print("|" + "".center(13) + "|", end='\t')
         for i in range(5):
             print("".center(13), end='\t')
-        print("|" + Paris.place.center(13) + "|")
+        if len(Paris.place) != 0:
+            x = ""
+            for j in Paris.place:
+                x += j
+            print("|" + x.center(13) + "|", end='\t')
+        else:
+            print("|" + "".center(13) + "|", end='\t')
+        print()
         print(" ------------- ".center(13), end='\t')
         for i in range(5):
             print("".center(13), end='\t')
@@ -118,10 +138,23 @@ class Board:
         for i in range(5):
             print("".center(13), end='\t')
         print("|" + str(New_York.price).center(13) + "|")
-        print("|" + Tokyo.place.center(13) + "|", end='\t')
+        if len(Tokyo.place) != 0:
+            x = ""
+            for j in Tokyo.place:
+                x += j
+            print("|" + x.center(13) + "|", end='\t')
+        else:
+            print("|" + "".center(13) + "|", end='\t')
         for i in range(5):
             print("".center(13), end='\t')
-        print("|" + New_York.place.center(13) + "|")
+        if len(New_York.place) != 0:
+            x = ""
+            for j in New_York.place:
+                x += j
+            print("|" + x.center(13) + "|", end='\t')
+        else:
+            print("|" + "".center(13) + "|", end='\t')
+        print()
         print(" ------------- ".center(13), end='\t')
         for i in range(5):
             print("".center(13), end='\t')
@@ -143,10 +176,25 @@ class Board:
         for i in range(5):
             print("".center(13), end='\t')
         print("|" + str(Seoul.price).center(13) + "|")
-        print("|" + Bali.place.center(13) + "|", end='\t')
+        if len(Bali.place) != 0:
+            x = ""
+            for j in Bali.place:
+                x += j
+            print("|" + x.center(13) + "|", end='\t')
+        else:
+            print("|" + "".center(13) + "|", end='\t')
+
         for i in range(5):
             print("".center(13), end='\t')
-        print("|" + Seoul.place.center(13) + "|")
+        if len(Seoul.place) != 0:
+            x = ""
+            for j in Seoul.place:
+                x += j
+            print("|" + x.center(13) + "|", end='\t')
+        else:
+            print("|" + "".center(13) + "|", end='\t')
+        print()
+
         print(" ------------- ".center(13), end='\t')
         for i in range(5):
             print("".center(13), end='\t')
@@ -165,11 +213,28 @@ class Board:
             print("|" + str(globals()[i].price).center(13) + "|", end='\t')
         print()
         for i in reversed(city_name[0:7]):
-            print("|" + globals()[i].place.center(13) + "|", end='\t')
+            if len(globals()[i].place) != 0:
+                x = ""
+                for j in globals()[i].place:
+                    x += j
+                print("|" + x.center(13) + "|", end='\t')
+            else:
+                print("|" + "".center(13) + "|", end='\t')
+        self.x = " "
         print()
         for i in reversed(city_name[0:7]):
             print(" ------------- ".center(13), end='\t')
         print()
+    
+    #city의 place의 위치정보를 삭제합니다.
+    def delete_position(self):
+        for i in city_name:
+            globals()[i].place.clear()
+
+    #city의 place에 위치정보를 넣습니다.
+    def check_position(self):
+        globals()[city_name[self.player.place]].place.append(" P ")     #player는 P로 표시됩니다.
+        globals()[city_name[self.computer.place]].place.append(" C ")   #computer는 C로 표시됩니다.
 
 
 class City:
@@ -177,7 +242,7 @@ class City:
         self.name = name
         self.owner = "empty"
         self.price = 300
-        self.place = ""
+        self.place = []
 
 
 
@@ -243,8 +308,17 @@ class Player:  # real player
         return self
 
 while True:
-    board = Board()
-    player = Player()
-    computer = ComputerPlayer()
-    board.print_board()
+    player = Player()                #player 생성
+    computer = ComputerPlayer()      #computer 생성
+    board = Board(player, computer)  #board 생성
+    board.check_position()           #player와 computer 위치 확인
+    board.print_board()              #board 출력
+    board.delete_position()          #player와 computer 위치정보 삭제
+    player.move()                    #player 이동
+    board.check_position()           #player와 computer 위치 확인
+    board.print_board()              #board 출력
+    board.delete_position()          #player와 computer 위치정보 삭제
+    computer.move()                  #computer 이동
+    board.check_position()           #player와 computer 위치 확인
+    board.print_board()              #board 출력
     break;
