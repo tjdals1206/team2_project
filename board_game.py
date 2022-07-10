@@ -1,4 +1,5 @@
 import random
+import time
 
 
 class ComputerPlayer:
@@ -19,25 +20,25 @@ class ComputerPlayer:
         dice = random.randint(1, 6)  # 랜덤 함수를 이용해서 1, 6사이의 랜덤한 숫자를 반환함
         print("컴퓨터가 주사위를 굴렸습니다. " + str(dice) + "만큼 이동합니다.")
         self.place += dice  # 위치 인덱스에 결과값을 더함
-        return self.place
+        if self.place > 19:
+            self.place -= 20
 
-    def buy(self, price):  # 도시가 비어 있고, 잔고가 도시 가격 이상이면 도시를 구매
+    def buy(self, price, city_name):  # 도시가 비어 있고, 잔고가 도시 가격 이상이면 도시를 구매
         if self.balance >= price:
-            print("컴퓨터가 " + self.city_name + "을(를) 구매했습니다.")
+            print("컴퓨터가 " + city_name + "을(를) 구매했습니다.")
             self.balance -= price
             print("컴퓨터의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
         else:
             print("잔고가 부족합니다. 도시를 구매하지 못했습니다.")
 
-    def pay(self, price):  # 도시의 소유주가 있을 경우 도시 가격만큼 통행료를 지불
-        if self.owner == "player":
-            if self.balance >= price:
-                print("컴퓨터가 " + self.city_name + "을(를) 구매했습니다.")
-                self.balance -= price
-                print("컴퓨터의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
-            else:
-                self.balance -= price
-                print("잔고가 부족합니다. 컴퓨터가 대금을 지불하지 못했습니다.")
+    def pay(self, price, city_name):  # 도시의 소유주가 있을 경우 도시 가격만큼 통행료를 지불
+        if self.balance >= price:
+            print("컴퓨터가 " + city_name + "을(를) 지불했습니다.")
+            self.balance -= price
+            print("컴퓨터의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
+        else:
+            self.balance -= price
+            print("잔고가 부족합니다. 컴퓨터가 대금을 지불하지 못했습니다.")
 
     def receive(self, price):  # 플레이어가 컴퓨터의 도시를 방문했을 때 통행료를 받음
         self.balance += price
@@ -45,6 +46,7 @@ class ComputerPlayer:
 
     def is_bankrupt(self):  # 잔고가 0보다 작으면 파산함, 파산할 경우 false를 리턴
         if self.balance < 0:
+            print(self.name + "이 패배했습니다")
             return False
         else:
             return True
@@ -110,7 +112,7 @@ class Board:
         if len(Sydney.place) != 0:
             x = ""
             for j in Sydney.place:
-               x += j
+                x += j
             print("|" + x.center(13) + "|", end='\t')
         else:
             print("|" + "".center(13) + "|", end='\t')
@@ -232,26 +234,24 @@ class Board:
         for i in reversed(city_name[0:7]):
             print(" ------------- ".center(13), end='\t')
         print()
-    
-    #city의 place의 위치정보를 삭제합니다.
+
+    # city의 place의 위치정보를 삭제합니다.
     def delete_position(self):
         for i in city_name:
             globals()[i].place.clear()
 
-    #city의 place에 위치정보를 넣습니다.
+    # city의 place에 위치정보를 넣습니다.
     def check_position(self):
-        globals()[city_name[self.player.place]].place.append(" P ")     #player는 P로 표시됩니다.
-        globals()[city_name[self.computer.place]].place.append(" C ")   #computer는 C로 표시됩니다.
+        globals()[city_name[self.player.place]].place.append(" P ")  # player는 P로 표시됩니다.
+        globals()[city_name[self.computer.place]].place.append(" C ")  # computer는 C로 표시됩니다.
 
 
 class City:
     def __init__(self, name):
         self.name = name
         self.owner = "empty"
-        self.price = 300
+        self.price = 500
         self.place = []
-
-
 
 
 Start = City("Start")
@@ -272,7 +272,7 @@ class Player:  # real player
         self.place = 0  # player의 현재 위치
         self.balance = 5000  # player의 현재 잔고
         self.owner = ""  # 위치한 도시의 소유주
-        self.city_name = ""  #도시의 이름 
+        self.city_name = ""  # 도시의 이름
 
     def getName(self):
         return self.name
@@ -287,52 +287,95 @@ class Player:  # real player
         dice = random.randint(1, 6)
         print(self.name + " 가 주사위를 굴렸습니다. " + str(dice) + "만큼 이동합니다.")
         self.place += dice
-
-        return self.place
+        if self.place > 19:
+            self.place -= 20
 
     def buy(self, price, city_name):  # 이동한 도시가 비어있고, 잔고 충분하다면 도시를 구매
         if self.balance >= price:
-            print(self.name + " 이(가) " + self.city_name + "을(를) 구매했습니다.")
+            print(self.name + " 이(가) " + city_name + "을(를) 구매했습니다.")
             self.balance -= price
             print(self.name + "의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
         else:
             print("잔고가 부족합니다. 도시를 구매하지 못했습니다.")
 
-    def pay(self, price):  # 이동한 도시의 주인이 있을 때 통행료을 지불하고 잔고가 부족하다면 표시
-        if self.owner == "player":
-            if self.balance >= price:
-                print(self.name + "이(가)" + self.city_name + "을(를) 구매했습니다.")
-                self.balance -= price
-                print(self.name + " 의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
-            else:
-                print("잔고가 부족합니다." + self.name + "이(가) 대금을 지불하지 못했습니다.")
-    
-    def receive(self, price): # 컴퓨터가 내가 소유한 도시에 도착해서 대금을 지불했다면 대금을 받음
+    def pay(self, price, city_name):  # 이동한 도시의 주인이 있을 때 통행료을 지불하고 잔고가 부족하다면 표시
+        if self.balance >= price:
+            print(self.name + "이(가)" + city_name + "을(를) 지불했습니다.")
+            self.balance -= price
+            print(self.name + " 의 잔고가 " + str(self.balance) + "만큼 남았습니다.")
+        else:
+            self.balance -= price
+            print("잔고가 부족합니다." + self.name + "이(가) 대금을 지불하지 못했습니다.")
+
+    def receive(self, price):  # 컴퓨터가 내가 소유한 도시에 도착해서 대금을 지불했다면 대금을 받음
         self.balance += price
-        print(self.name +"이(가)" + str(price) + "를 받았습니다." )
-    
-    def is_bankrupt(self): # player의 잔고로 대금을 지불하지 못해 파산 잔고가 0보다 적으면 False를 리턴
+        print(self.name + "이(가)" + str(price) + "를 받았습니다.")
+
+    def is_bankrupt(self):  # player의 잔고로 대금을 지불하지 못해 파산 잔고가 0보다 적으면 False를 리턴
         if self.balance < 0:
             print(self.name + "이 패배했습니다")
             return False
         else:
             return True
-    
 
-
-
+player = Player()                       #player 생성
+computer = ComputerPlayer()             #computer 생성
+board = Board(player, computer)         #board 생성
+board.check_position()                  #위치 확인
+board.print_board()                     #board 출력
 while True:
-    player = Player()                #player 생성
-    computer = ComputerPlayer()      #computer 생성
-    board = Board(player, computer)  #board 생성
-    board.check_position()           #player와 computer 위치 확인
-    board.print_board()              #board 출력
-    board.delete_position()          #player와 computer 위치정보 삭제
-    player.move()                    #player 이동
-    board.check_position()           #player와 computer 위치 확인
-    board.print_board()              #board 출력
-    board.delete_position()          #player와 computer 위치정보 삭제
-    computer.move()                  #computer 이동
-    board.check_position()           #player와 computer 위치 확인
-    board.print_board()              #board 출력
-    break;
+    board.delete_position()
+    player.move()                       #player의 차례로 시작합니다.
+    time.sleep(2)
+    board.check_position()
+    board.print_board()
+    print(f"player의 잔고가 {player.balance}만큼 남았습니다.")              
+    if globals()[city_name[player.place]].owner == "empty":        #도시의 주인이 없다면 도시를 사겠냐고 질문합니다.
+        answer_p = input("도시를 사시겠습니까? (Y/N) :" )
+        if answer_p == "Y":
+            player.buy(globals()[city_name[player.place]].price, city_name[player.place])
+            globals()[city_name[player.place]].owner = "Player"
+        else:
+            pass
+    elif globals()[city_name[player.place]].owner == "nothing":    #start는 무시합니다.
+        pass
+    else:                                                          #도시의 주인이 있다면 비용을 질문하고 도시를 사겠냐고 질문합니다.
+        player.pay(globals()[city_name[player.place]].price, city_name[player.place])
+        if player.is_bankrupt() == False:                          #돈을 지불할 때, 돈이 부족하다면 게임이 끝납니다.
+            print("Computer가 승리했습니다.")
+            break
+        computer.receive(globals()[city_name[player.place]].price)
+        answer_p = input("도시를 사시겠습니까? (Y/N) :")
+        if answer_p == "Y":
+            player.buy(globals()[city_name[player.place]].price, city_name[player.place])
+            globals()[city_name[player.place]].owner = "Player"
+        else:
+            pass
+    time.sleep(2)
+    board.print_board()
+    time.sleep(3)
+
+    board.delete_position()
+    computer.move()                      #computer의 차례입니다. 아래 내용은 player와 같습니다.
+    time.sleep(2)
+    board.check_position()
+    board.print_board()
+    print(f"computer의 잔고가 {computer.balance}만큼 남았습니다.")          
+    if globals()[city_name[computer.place]].owner == "empty":
+        computer.buy(globals()[city_name[computer.place]].price, city_name[computer.place])
+        globals()[city_name[computer.place]].owner = "Computer"
+    elif globals()[city_name[computer.place]].owner == "nothing":
+        pass
+    else:
+        computer.pay(globals()[city_name[computer.place]].price, city_name[computer.place])
+        if computer.is_bankrupt() == False:
+            print("Player가 승리했습니다.")
+            break
+        player.receive(globals()[city_name[computer.place]].price)
+        computer.buy(globals()[city_name[computer.place]].price, city_name[computer.place])
+        globals()[city_name[computer.place]].owner = "Computer"
+    time.sleep(2)
+    board.print_board()
+    time.sleep(3)
+
+
